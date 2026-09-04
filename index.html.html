@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Mart — Distribution & Retail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14213D;
+    --steel:#3C5068;
+    --paper:#EFEDE5;
+    --paper-2:#E6E2D6;
+    --line:#C9C2AF;
+    --brass:#B8792B;
+    --brass-dark:#8F5C1E;
+    --cream-text:#F4F2EA;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3, .display{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    line-height:0.92;
+    color:var(--ink);
+  }
+
+  .mono{
+    font-family:'Roboto Mono', monospace;
+    letter-spacing:0.02em;
+  }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:20;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 32px;
+    max-width:1120px; margin:0 auto;
+  }
+  .logo{
+    display:flex; align-items:baseline; gap:10px;
+  }
+  .logo-mark{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:800;
+    font-size:26px;
+    letter-spacing:0.01em;
+  }
+  .logo-sub{
+    font-family:'Roboto Mono', monospace;
+    font-size:11px;
+    color:var(--steel);
+    letter-spacing:0.03em;
+  }
+  header nav a{
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    color:var(--steel);
+    margin-left:28px;
+  }
+  header nav a:hover{color:var(--brass-dark);}
+  header nav{display:flex; align-items:center;}
+  @media(max-width:640px){ header nav{display:none;} }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:96px 0 80px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .hero-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Roboto Mono', monospace;
+    font-size:12px;
+    color:var(--brass-dark);
+    border:1px solid var(--brass);
+    padding:6px 12px;
+    margin-bottom:28px;
+  }
+  .hero-tag::before{
+    content:"";
+    width:7px; height:7px;
+    background:var(--brass);
+    display:inline-block;
+    border-radius:50%;
+  }
+  h1.hero-head{
+    font-size:clamp(52px, 9vw, 118px);
+    max-width:900px;
+  }
+  .hero-head .line2{ color:var(--brass-dark); }
+  .hero-sub{
+    max-width:560px;
+    font-size:19px;
+    color:var(--steel);
+    margin-top:28px;
+  }
+  .hero-actions{
+    margin-top:40px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block;
+    padding:15px 30px;
+    font-weight:600;
+    font-size:15px;
+    text-decoration:none;
+    border:1px solid var(--ink);
+  }
+  .btn-solid{
+    background:var(--ink);
+    color:var(--cream-text);
+  }
+  .btn-solid:hover{ background:var(--brass-dark); border-color:var(--brass-dark); }
+  .btn-outline{
+    color:var(--ink);
+    background:transparent;
+  }
+  .btn-outline:hover{ border-color:var(--brass-dark); color:var(--brass-dark); }
+
+  /* ---------- Ledger strip ---------- */
+  .ledger{
+    border-bottom:1px solid var(--line);
+    background:var(--paper-2);
+  }
+  .ledger .wrap{
+    display:flex; flex-wrap:wrap;
+    padding:22px 32px;
+    gap:8px 40px;
+  }
+  .ledger-item{
+    font-family:'Roboto Mono', monospace;
+    font-size:12px;
+    color:var(--steel);
+  }
+  .ledger-item b{ color:var(--ink); }
+
+  /* ---------- About ---------- */
+  .about{
+    padding:88px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .section-head{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  @media(max-width:760px){ .section-head{grid-template-columns:1fr;} }
+  .section-head h2{
+    font-size:clamp(34px,5vw,52px);
+  }
+  .about-copy p{
+    font-size:17px;
+    color:var(--steel);
+    max-width:520px;
+  }
+  .about-copy p + p{ margin-top:16px; }
+
+  /* ---------- Manifest / categories ---------- */
+  .manifest{
+    padding:88px 0 96px;
+    border-bottom:1px solid var(--line);
+  }
+  .manifest-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-bottom:40px;
+  }
+  .manifest-head h2{ font-size:clamp(34px,5vw,52px); }
+  .manifest-head p{
+    color:var(--steel);
+    max-width:340px;
+    font-size:15px;
+  }
+
+  .manifest-table{
+    border-top:1px solid var(--ink);
+  }
+  .m-row{
+    display:grid;
+    grid-template-columns: 90px 1fr 220px;
+    align-items:center;
+    padding:22px 4px;
+    border-bottom:1px solid var(--line);
+    gap:16px;
+    transition:background 0.15s ease;
+  }
+  .m-row:hover{ background:var(--paper-2); }
+  .m-code{
+    font-family:'Roboto Mono', monospace;
+    font-size:13px;
+    color:var(--brass-dark);
+  }
+  .m-name{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:600;
+    font-size:clamp(22px,3.4vw,32px);
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+  }
+  .m-note{
+    font-size:13px;
+    color:var(--steel);
+    text-align:right;
+  }
+  @media(max-width:640px){
+    .m-row{ grid-template-columns: 56px 1fr; }
+    .m-note{ display:none; }
+  }
+
+  /* ---------- Approach ---------- */
+  .approach{
+    padding:88px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .approach-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:44px;
+  }
+  @media(max-width:760px){ .approach-grid{grid-template-columns:1fr;} }
+  .approach-cell{
+    background:var(--paper);
+    padding:36px 30px;
+  }
+  .approach-cell .a-mark{
+    font-family:'Roboto Mono', monospace;
+    font-size:12px;
+    color:var(--brass-dark);
+    display:block;
+    margin-bottom:18px;
+  }
+  .approach-cell h3{
+    font-size:24px;
+    margin-bottom:12px;
+  }
+  .approach-cell p{
+    color:var(--steel);
+    font-size:15px;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact{
+    padding:96px 0 110px;
+    background:var(--ink);
+    color:var(--cream-text);
+  }
+  .contact .wrap{
+    display:grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap:60px;
+  }
+  @media(max-width:760px){ .contact .wrap{ grid-template-columns:1fr; } }
+  .contact h2{
+    color:var(--cream-text);
+    font-size:clamp(36px,5.5vw,58px);
+  }
+  .contact-copy p{
+    color:#C7CCD6;
+    font-size:17px;
+    max-width:480px;
+    margin-top:20px;
+  }
+  .contact-copy .btn-solid{
+    background:var(--brass);
+    border-color:var(--brass);
+    color:var(--ink);
+  }
+  .contact-copy .btn-solid:hover{ background:#D69640; border-color:#D69640; }
+
+  .email-line{
+    color:#C7CCD6;
+    font-size:15px;
+    margin-top:22px;
+  }
+  .email-line a{
+    color:var(--brass);
+    font-weight:600;
+    text-decoration:none;
+    border-bottom:1px solid var(--brass);
+  }
+  .email-line a:hover{ color:#D69640; border-color:#D69640; }
+
+  .contact-form{
+    margin-top:30px;
+    max-width:460px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .form-row{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .form-row label{
+    font-family:'Roboto Mono', monospace;
+    font-size:11px;
+    color:#8792A3;
+    letter-spacing:0.03em;
+  }
+  .form-row input,
+  .form-row textarea{
+    background:transparent;
+    border:1px solid #3A4A63;
+    color:var(--cream-text);
+    font-family:'Inter', sans-serif;
+    font-size:15px;
+    padding:12px 14px;
+    resize:vertical;
+  }
+  .form-row input:focus,
+  .form-row textarea:focus{
+    outline:none;
+    border-color:var(--brass);
+  }
+  .form-row input::placeholder,
+  .form-row textarea::placeholder{ color:#5E6A7D; }
+  .contact-form button{
+    align-self:flex-start;
+    margin-top:6px;
+  }
+
+  .amazon-link{
+    display:inline-block;
+    font-family:'Roboto Mono', monospace;
+    font-size:13px;
+    color:var(--brass);
+    text-decoration:none;
+    border-bottom:1px solid var(--brass);
+    padding-bottom:2px;
+  }
+  .amazon-link:hover{ color:#D69640; border-color:#D69640; }
+
+  .office-card{
+    border:1px solid #3A4A63;
+    padding:32px;
+  }
+  .office-card .o-label{
+    font-family:'Roboto Mono', monospace;
+    font-size:12px;
+    color:var(--brass);
+    margin-bottom:14px;
+    display:block;
+  }
+  .office-card h3{
+    color:var(--cream-text);
+    font-size:26px;
+    margin-bottom:10px;
+  }
+  .office-card p{
+    color:#AEB6C4;
+    font-size:15px;
+  }
+  .office-card .divider{
+    border-top:1px solid #3A4A63;
+    margin:22px 0;
+  }
+  .office-list{ list-style:none; }
+  .office-list li{
+    display:flex; justify-content:space-between;
+    font-size:13px;
+    color:#AEB6C4;
+    padding:6px 0;
+    border-bottom:1px dashed #3A4A63;
+  }
+  .office-list li:last-child{ border-bottom:none; }
+  .office-list span:last-child{ color:var(--cream-text); font-weight:600; }
+
+  footer{
+    background:var(--ink);
+    border-top:1px solid #3A4A63;
+    padding:22px 0;
+  }
+  footer .wrap{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:12px;
+    color:#8792A3;
+    font-family:'Roboto Mono', monospace;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-mark">AI MART</span>
+      <span class="logo-sub">PVT. BUSINESS CO.</span>
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#categories">Categories</a>
+      <a href="#approach">Approach</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="hero-tag mono">OPEN FOR PARTNERSHIP — NCR, INDIA</span>
+    <h1 class="hero-head">Distribution<br>&amp; Retail,<br><span class="line2">Open to Invest.</span></h1>
+    <p class="hero-sub">My AI Mart Private Business Company is looking to invest in and explore new business opportunities across distribution and retail — with manufacturers, brands and traders ready to grow into new markets.</p>
+    <div class="hero-actions">
+      <a href="mailto:info@myaimart.com" class="btn btn-solid">Start a Conversation</a>
+      <a href="#categories" class="btn btn-outline">See Product Interests</a>
+    </div>
+  </div>
+</section>
+
+<div class="ledger">
+  <div class="wrap">
+    <span class="ledger-item"><b>Entity</b> — Private Business Company</span>
+    <span class="ledger-item"><b>Registered Office</b> — NCR, India</span>
+    <span class="ledger-item"><b>Focus</b> — Distribution &amp; Retail</span>
+    <span class="ledger-item"><b>Status</b> — Open to Discuss</span>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Looking to<br>partner &amp; grow.</h2>
+      <div class="about-copy">
+        <p>We are open to investing in and exploring business opportunities in distribution or retail, across a wide range of product categories.</p>
+        <p>Whether you are a manufacturer looking for a distribution partner, a brand entering the NCR market, or a trader with an opportunity worth discussing — we would like to hear from you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="manifest" id="categories">
+  <div class="wrap">
+    <div class="manifest-head">
+      <h2>Categories we<br>explore.</h2>
+      <p>Open across the following lines, and any adjacent consumer or industrial product.</p>
+    </div>
+    <div class="manifest-table">
+      <div class="m-row">
+        <span class="m-code mono">CAT.01</span>
+        <span class="m-name">IT Products</span>
+        <span class="m-note">Distribution &amp; Retail</span>
+      </div>
+      <div class="m-row">
+        <span class="m-code mono">CAT.02</span>
+        <span class="m-name">Telecom</span>
+        <span class="m-note">Distribution &amp; Retail</span>
+      </div>
+      <div class="m-row">
+        <span class="m-code mono">CAT.03</span>
+        <span class="m-name">Hardware</span>
+        <span class="m-note">Distribution &amp; Retail</span>
+      </div>
+      <div class="m-row">
+        <span class="m-code mono">CAT.04</span>
+        <span class="m-name">Food Items</span>
+        <span class="m-note">Distribution &amp; Retail</span>
+      </div>
+      <div class="m-row">
+        <span class="m-code mono">CAT.05</span>
+        <span class="m-name">Electronics</span>
+        <span class="m-note">Distribution &amp; Retail</span>
+      </div>
+      <div class="m-row">
+        <span class="m-code mono">CAT.06</span>
+        <span class="m-name">Power</span>
+        <span class="m-note">Distribution &amp; Retail</span>
+      </div>
+      <div class="m-row">
+        <span class="m-code mono">CAT.07</span>
+        <span class="m-name">Other Consumer &amp; Industrial Products</span>
+        <span class="m-note">Open to Discuss</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="approach" id="approach">
+  <div class="wrap">
+    <h2 style="font-size:clamp(34px,5vw,52px);">How we<br>work with you.</h2>
+    <div class="approach-grid">
+      <div class="approach-cell">
+        <span class="a-mark mono">01 — INVEST</span>
+        <h3>Capital &amp; Backing</h3>
+        <p>We bring capital to distribution and retail ventures with a clear path to market.</p>
+      </div>
+      <div class="approach-cell">
+        <span class="a-mark mono">02 — DISTRIBUTE</span>
+        <h3>Reach &amp; Retail</h3>
+        <p>We help move products from manufacturer to shelf, across our target categories.</p>
+      </div>
+      <div class="approach-cell">
+        <span class="a-mark mono">03 — DISCUSS</span>
+        <h3>Open Conversation</h3>
+        <p>Every opportunity starts with a conversation — reach out and let's talk it through.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-copy">
+      <h2>Let's discuss<br>the opportunity.</h2>
+      <p>If you have a distribution or retail opportunity — in IT products, telecom, hardware, food items, electronics, power, or any other consumer or industrial product — reach out to us for a discussion.</p>
+      <p class="email-line">Email — <a href="mailto:info@myaimart.com">info@myaimart.com</a></p>
+
+      <form class="contact-form" action="https://formspree.io/f/xeerzbgr" method="POST">
+        <div class="form-row">
+          <label for="f-name">Name</label>
+          <input id="f-name" type="text" name="name" required placeholder="Your name">
+        </div>
+        <div class="form-row">
+          <label for="f-email">Email</label>
+          <input id="f-email" type="email" name="_replyto" required placeholder="you@company.com">
+        </div>
+        <div class="form-row">
+          <label for="f-message">Opportunity / Message</label>
+          <textarea id="f-message" name="message" rows="4" required placeholder="Tell us about the product category and opportunity"></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid" style="border:none; cursor:pointer;">Send Enquiry</button>
+      </form>
+    </div>
+    <div class="office-card">
+      <span class="o-label mono">REGISTERED OFFICE</span>
+      <h3>My AI Mart Pvt. Business Co.</h3>
+      <p>National Capital Region (NCR), India</p>
+      <div class="divider"></div>
+      <ul class="office-list">
+        <li><span>Interested in</span><span>Distribution / Retail</span></li>
+        <li><span>Investment</span><span>Open</span></li>
+        <li><span>Region</span><span>NCR, India</span></li>
+        <li><span>Email</span><span>info@myaimart.com</span></li>
+      </ul>
+      <div class="divider"></div>
+      <a href="https://www.amazon.in/?tag=myaimart-21" target="_blank" rel="noopener sponsored" class="amazon-link">
+        Shop our picks on Amazon ↗
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 MY AI MART PRIVATE BUSINESS COMPANY</span>
+    <span>REGISTERED OFFICE — NCR, INDIA</span>
+  </div>
+</footer>
+
+</body>
+</html>
